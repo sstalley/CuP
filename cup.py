@@ -22,7 +22,6 @@ def gen_gp_boundary(N=1000, mu=3, l=0.5, edge=20):
 
     return (xx, yy)
 
-
 # sampling function stolen from John's code
 def sampleAt(loc, context, verbose=False):
     xx, yy = context
@@ -32,7 +31,6 @@ def sampleAt(loc, context, verbose=False):
     ybar = yy - 0.5
     locbar = loc - 0.5
     rr = np.sqrt(xbar**2 + ybar**2)
-    #tt = np.linspace(0, 2*np.pi, rr.shape[0])
     tt = 2*np.arctan(ybar / (xbar + rr))
     r = np.sqrt(locbar[0]**2 + locbar[1]**2)
     if (np.abs(locbar[1]) < 1e-8) and (locbar[0] > 0):
@@ -49,7 +47,7 @@ def sampleAt(loc, context, verbose=False):
     else:
         return -1.0
 
-def cup2(G, w, init_plus, init_minus):
+def cup(G, w, init_plus, init_minus):
     snaps = 0
     edges = 0
     dist = 0.0
@@ -84,11 +82,11 @@ def cup2(G, w, init_plus, init_minus):
             break
 
         # sample a cell until a new cut edge is found
-        # note that the shortest path will find all the elements in the current cell (regardless of shape)
+        # note that the shortest path will find all the elements in the current cell
         for v in path[1:-1]: # ignore current pos and dest since they have already been sampled
 
             if sample_map[v] == False:
-                dist += np.linalg.norm((np.array(v) - np.array(pos))/w) # only works for square grids
+                dist += np.linalg.norm((np.array(v) - np.array(pos))/w)
                 pos = v
                 snaps += 1
                 sample_map[pos] = True
@@ -106,7 +104,6 @@ def cup2(G, w, init_plus, init_minus):
                 edges +=1
                 break
 
-    #TODO: error for non-square grids
     err = edges / (w * w)
 
     return G, err, dist, snaps, edges, pos

@@ -129,7 +129,6 @@ def s2(G, budget, w, init_plus, init_minus):
                                 min_path = path 
                                 min_travel_len = travel_len
                                 min_node_index = node_index
-        
 
                 if (len(min_path) > 0): # no need to check other other paths if we already found a shortest-shortest
                     break

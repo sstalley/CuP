@@ -5,11 +5,10 @@ import s2
 import time
 from joblib import Parallel, delayed
 
-
 # initial parameters
 saveFigs = True
 MC = 100
-modes = ['CuP2', 's2']
+modes = ['CuP', 's2']
 mode_labels = ['CuP', '$S^{2}$']
 wRange = range(10,50+1)
 edge = 10 # determines how close the GP gets to the edge of the graph
@@ -57,8 +56,8 @@ def boundry_tests(modes, edge, N, mu):
 
             start = time.time()
 
-            if mode == 'CuP2':
-                G, area, mdist, nsamp, _, _ = cup.cup2(G, w, init_plus, init_minus)
+            if mode == 'CuP':
+                G, area, mdist, nsamp, _, _ = cup.cup(G, w, init_plus, init_minus)
 
             elif mode == 's2':
                 G, area, mdist, nsamp = s2.s2(G, maxiter, w, init_plus, init_minus)
@@ -75,7 +74,6 @@ def boundry_tests(modes, edge, N, mu):
             rtime[ww,m] = rt
 
     return ns, dist, err, rtime
-
 
 cache_name = "./both_cache_MC" + str(MC) + ".npy"
 
