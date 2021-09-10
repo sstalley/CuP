@@ -11,7 +11,7 @@ MC = 100
 modes = ['CuP2', 's2']
 mode_labels = ['CuP', '$S^{2}$']
 wRange = range(10,50+1)
-figpath ='../papers/cupSPL/Figures/'
+figpath ='./Figures/'
 sbname="./sbs.npy"
 
 #stuff for the fire maps
